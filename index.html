@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>جزیره اعلمی | Alami Island</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0b0b;--card:#171313;--text:#efe9e6;--mute:#a79b97;--red:#e11d2e}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9}
+body.locked{overflow:hidden}
+
+/* ---------- intro (only transform/opacity animations = light) ---------- */
+#intro{position:fixed;inset:0;z-index:99;background:#000;overflow:hidden;cursor:pointer;animation:out 5s forwards}
+@keyframes out{0%,90%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+#intro .bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,#8a000c 0,#2c0005 45%,#000 82%);animation:lights 5s forwards}
+@keyframes lights{0%,10%{opacity:0}12%{opacity:.9}14%{opacity:0}18%{opacity:1}20%{opacity:.1}23%,100%{opacity:1}}
+.stage{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;animation:quake .07s 2.3s 7 alternate}
+@keyframes quake{from{transform:translate(-8px,4px)}to{transform:translate(8px,-4px)}}
+.skull{animation:zoom 1.3s cubic-bezier(.1,.9,.2,1) .9s both,throb 1.3s 3.2s infinite}
+.skull svg{display:block;width:clamp(150px,38vw,260px);filter:drop-shadow(0 0 20px #f00)}
+@keyframes zoom{from{transform:scale(6);opacity:0}50%{opacity:1}to{transform:scale(1);opacity:1}}
+@keyframes throb{50%{transform:scale(1.06)}}
+.eye{opacity:0;transform-box:fill-box;transform-origin:center;animation:eye .7s 2.2s infinite alternate both}
+@keyframes eye{from{opacity:.55;transform:scale(.7)}to{opacity:1;transform:scale(1.4)}}
+.jaw{animation:chat .16s 2.4s 12 alternate}
+@keyframes chat{to{transform:translateY(9px)}}
+.t{font-weight:800;font-size:clamp(40px,11vw,88px);color:#fff;margin-top:12px;opacity:0;text-shadow:0 0 16px #f00;animation:reveal 1s 2.9s both,glitch 2.4s 4s infinite}
+@keyframes reveal{from{opacity:0;transform:scale(1.4)}to{opacity:1;transform:none}}
+@keyframes glitch{0%,88%,100%{transform:none}90%{transform:translate(-8px,2px) skewX(8deg)}93%{transform:translate(8px,-2px) skewX(-8deg)}96%{transform:none}}
+.en{direction:ltr;letter-spacing:.5em;color:#ff7b86;font-weight:300;font-size:clamp(13px,3.4vw,22px);opacity:0;animation:fadein 1s 3.4s both}
+.wh{color:#b88;font-size:clamp(13px,3vw,17px);margin-top:14px;opacity:0;animation:fadein 1s 4s both}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.drips{position:absolute;inset:0;z-index:1;pointer-events:none}
+.drip{position:absolute;top:0;height:var(--h);transform:scaleY(0);transform-origin:top;background:linear-gradient(#a00010,#e11d2e);border-radius:0 0 40px 40px;animation:fall var(--d) var(--t) ease-in forwards}
+@keyframes fall{to{transform:scaleY(1)}}
+.vig{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 40%,#000 100%)}
+.hit{position:absolute;inset:0;z-index:5;background:#ff1a2b;opacity:0;pointer-events:none;animation:hit .6s 2.2s}
+@keyframes hit{0%{opacity:1}100%{opacity:0}}
+.skip{position:absolute;z-index:6;bottom:18px;width:100%;text-align:center;color:#7a5a5a;font-size:13px}
+
+/* ---------- site ---------- */
+.topbar{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:8px 14px;font-size:12px;color:#9a6a6a;background:#0a0606;border-bottom:1px solid #2a1212;text-align:center}
+.ic{width:14px;height:14px;color:var(--red);flex:none}
+header{position:relative;z-index:1;overflow:hidden;text-align:center;padding:80px 20px 50px}
+header>*{position:relative;z-index:1}
+header h1{font-size:clamp(34px,7vw,60px);font-weight:800;text-shadow:0 0 20px rgba(225,29,46,.5);animation:hflick 6s infinite}
+header h1 span{display:block;direction:ltr;font-size:.32em;font-weight:300;color:var(--red);letter-spacing:.45em;margin-top:6px}
+header p{color:var(--mute);margin-top:14px}
+@keyframes hflick{0%,92%,100%{opacity:1}93%{opacity:.35}94%{opacity:1}96%{opacity:.5}97%{opacity:1}}
+.sigil{position:absolute!important;z-index:0!important;left:50%;top:50%;width:min(480px,90vw);height:min(480px,90vw);margin:calc(min(480px,90vw)/-2) 0 0 calc(min(480px,90vw)/-2);color:var(--red);opacity:.12;animation:spin 80s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.claw{position:absolute!important;z-index:2!important;width:80px;opacity:.7;pointer-events:none}
+.claw.a{right:4%;top:40px}.claw.b{left:3%;bottom:10px;transform:scaleX(-1) rotate(8deg)}
+.claw path{stroke-dasharray:1;stroke-dashoffset:1;animation:scratch .7s ease-out forwards}
+.claw path:nth-child(1){animation-delay:5.2s}.claw path:nth-child(2){animation-delay:5.4s}.claw path:nth-child(3){animation-delay:5.6s}
+@keyframes scratch{to{stroke-dashoffset:0}}
+.hd{position:absolute;left:0;right:0;top:0;z-index:2;pointer-events:none}
+main{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 20px 90px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:28px}
+figure{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid #261e1e;transition:border-color .25s;content-visibility:auto;contain-intrinsic-size:auto 340px}
+.ph{position:relative}
+.ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
+.ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(70,0,8,.5),rgba(0,0,0,.55));transition:opacity .3s}
+figure:hover,figure.lit{border-color:var(--red)}
+figure:hover .ph::after,figure.lit .ph::after{opacity:0}
+figure.neg .ph::after{opacity:1;background:rgba(200,0,15,.75)}
+figure.neg figcaption{color:var(--red);font-weight:800}
+figcaption{padding:16px 18px 20px;white-space:pre-line;font-weight:300}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:60px 0}
+footer{position:relative;z-index:1;text-align:center;color:#6c6260;padding:30px;border-top:1px solid #1e1818;font-size:14px}
+.foot6{letter-spacing:.3em;color:#7a2a2a}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out;padding:20px}
+#lb.on{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:8px}
+
+/* ---------- light horror layers (static or opacity/transform only) ---------- */
+body::before{content:"";position:fixed;inset:0;z-index:37;pointer-events:none;
+ background:radial-gradient(ellipse at 20% 110%,rgba(130,0,10,.3),transparent 55%),radial-gradient(ellipse at 85% 105%,rgba(90,0,7,.3),transparent 55%),
+ radial-gradient(circle at 3% 5%,#5a0007 0 4%,transparent 4.5%),radial-gradient(circle at 8% 10%,#5a0007 0 1.8%,transparent 2.2%),
+ radial-gradient(circle at 97% 92%,#5a0007 0 4.5%,transparent 5%),radial-gradient(circle at 91% 96%,#5a0007 0 2%,transparent 2.4%)}
+.beat{position:fixed;inset:0;z-index:36;pointer-events:none;background:radial-gradient(circle,transparent 50%,rgba(150,0,10,.75) 100%);animation:hb 1.15s infinite}
+@keyframes hb{0%,100%{opacity:calc(.2 + var(--s,0)*.4)}10%{opacity:calc(.5 + var(--s,0)*.5)}20%{opacity:calc(.2 + var(--s,0)*.4)}30%{opacity:calc(.4 + var(--s,0)*.45)}}
+.flood{position:fixed;left:0;right:0;bottom:0;height:30vh;z-index:0;pointer-events:none;transform:translateY(125%);will-change:transform;background:linear-gradient(#b3000f,#6b0008 55%,#340004)}
+.flood::before{content:"";position:absolute;left:0;right:0;top:-18px;height:20px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='20' viewBox='0 0 120 20'><path d='M0 10Q15 0 30 10T60 10T90 10T120 10V20H0Z' fill='%23b3000f'/></svg>") repeat-x}
+.eyes{position:fixed;z-index:41;pointer-events:none;display:flex;gap:14px;opacity:0;animation:blink 2.6s forwards}
+.eyes i{display:block;width:22px;height:14px;background:radial-gradient(ellipse,#ff4040 0 25%,rgba(255,0,0,.5) 45%,transparent 70%)}
+@keyframes blink{0%,100%{opacity:0}12%,40%{opacity:1}46%{opacity:0}52%,85%{opacity:1}}
+.whisper{position:fixed;z-index:42;pointer-events:none;color:#c0121f;font-weight:800;font-size:clamp(18px,4vw,32px);opacity:0;white-space:normal;max-width:78vw;animation:wh 4s forwards}
+@keyframes wh{0%{opacity:0}25%,65%{opacity:.75}100%{opacity:0}}
+#js{position:fixed;inset:0;z-index:98;background:#c4000f;display:none;align-items:center;justify-content:center;pointer-events:none}
+#js.on{display:flex;animation:jshake .07s 7 alternate}
+#js svg{width:min(80vw,500px);animation:jzoom .55s ease-out both}
+@keyframes jzoom{from{transform:scale(.3)}to{transform:scale(1.25)}}
+@keyframes jshake{from{transform:translate(-12px,6px)}to{transform:translate(12px,-6px)}}
+.snd{position:fixed;z-index:60;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:14px;background:#1a0a0a;color:#d88;border:1px solid #5a1a1a;border-radius:20px;padding:10px 16px;font:inherit;font-size:14px;cursor:pointer}
+.lite .beat,.lite .sigil,.lite .claw{display:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important}}
+</style>
+</head>
+<body class="locked">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pg" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><circle cx="50" cy="50" r="47"/><path transform="rotate(180 50 50)" d="M50 6L75.9 85.6L8.2 36.4L91.8 36.4L24.1 85.6Z"/></g></symbol></svg>
+
+<div id="intro" onclick="endIntro()">
+  <div class="bg"></div>
+  <div class="drips" id="drips"></div>
+  <div class="stage">
+    <div class="skull">
+      <svg viewBox="0 0 200 230" aria-hidden="true">
+        <defs><radialGradient id="bn" cx="50%" cy="35%"><stop offset="0" stop-color="#f3ece0"/><stop offset="1" stop-color="#8f8273"/></radialGradient></defs>
+        <rect x="50" y="164" width="100" height="14" fill="#000"/>
+        <g class="jaw"><rect x="52" y="172" width="96" height="40" rx="10" fill="url(#bn)"/><path d="M68 172v40M84 172v40M100 172v40M116 172v40M132 172v40" stroke="#2a0004" stroke-width="3"/></g>
+        <path d="M100 8C50 8 18 44 18 92c0 26 10 42 26 54v22c0 9 7 16 16 16h80c9 0 16-7 16-16v-22c16-12 26-28 26-54C182 44 150 8 100 8z" fill="url(#bn)"/>
+        <path d="M118 10l-12 30 14 14-10 22" stroke="#3a0006" stroke-width="2.5" fill="none"/>
+        <ellipse cx="66" cy="96" rx="25" ry="29" fill="#000"/><ellipse cx="134" cy="96" rx="25" ry="29" fill="#000"/>
+        <circle class="eye" cx="66" cy="98" r="8" fill="#ff1a1a"/><circle class="eye" cx="134" cy="98" r="8" fill="#ff1a1a"/>
+        <path d="M100 122l-11 26h22z" fill="#000"/>
+      </svg>
+    </div>
+    <div class="t">جزیره اعلمی</div>
+    <div class="en">ALAMI ISLAND</div>
+    <div class="wh">خوش اومدی... اگه جرئت داری</div>
+  </div>
+  <div class="vig"></div><div class="hit"></div>
+  <div class="skip">برای رد شدن لمس کن</div>
+</div>
+
+<div class="beat" id="beat"></div><div class="flood" id="flood"></div><div id="js"></div>
+<button class="snd" id="snd">🔇 صدای جزیره</button>
+
+<div class="topbar">
+  <svg class="ic"><use href="#pg"/></svg><span>🐐</span>
+  <span>ورود به جزیره با مسئولیت خودتونه… هر کی اینجا اومده، یه چیزی ازش جا مونده. نگهبان جزیره: ابرام</span>
+  <span>666</span><span>☠</span><svg class="ic"><use href="#pg"/></svg>
+</div>
+<header>
+  <div class="hd" id="hd"></div>
+  <svg class="claw a" viewBox="0 0 120 160" aria-hidden="true"><g stroke="#b3000f" stroke-width="5" stroke-linecap="round" fill="none"><path pathLength="1" d="M20 5C30 50 28 100 40 155"/><path pathLength="1" d="M50 0C60 50 58 105 70 158"/><path pathLength="1" d="M80 8C90 55 88 100 100 150"/></g></svg>
+  <svg class="claw b" viewBox="0 0 120 160" aria-hidden="true"><g stroke="#b3000f" stroke-width="5" stroke-linecap="round" fill="none"><path pathLength="1" d="M20 5C30 50 28 100 40 155"/><path pathLength="1" d="M50 0C60 50 58 105 70 158"/><path pathLength="1" d="M80 8C90 55 88 100 100 150"/></g></svg>
+  <svg class="sigil"><use href="#pg"/></svg>
+  <h1>جزیره اعلمی<span>ALAMI ISLAND</span></h1>
+  <p>خوش اومدی به جزیره</p>
+</header>
+<main id="g"></main>
+<footer><span class="foot6">666</span> &nbsp;<svg class="ic" style="display:inline-block;vertical-align:middle"><use href="#pg"/></svg>&nbsp; Alami Island &nbsp;<svg class="ic" style="display:inline-block;vertical-align:middle"><use href="#pg"/></svg>&nbsp; <span class="foot6">666</span></footer>
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+
+<script>
+function endIntro(){document.getElementById('intro').style.display='none';document.body.classList.remove('locked')}
+setTimeout(endIntro,5000);
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const lite=rm||(navigator.deviceMemory&&navigator.deviceMemory<=4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
+if(lite)document.documentElement.classList.add('lite');
+const rnd=Math.random;
+
+// drips (few, transform-only)
+function drips(el,n,h,t0){for(let i=0;i<n;i++){const d=document.createElement('i');d.className='drip';
+ d.style.cssText=`left:${rnd()*100}%;width:${6+rnd()*14}px;--h:${h()};--d:${1.5+rnd()*2}s;--t:${t0+rnd()*2}s`;el.append(d)}}
+drips(document.getElementById('drips'),lite?8:14,()=>(15+rnd()*60)+'%',2.3);
+drips(document.getElementById('hd'),lite?4:8,()=>(25+rnd()*110)+'px',5.2);
+
+// gallery
+const g=document.getElementById('g'),lb=document.getElementById('lb');
+function render(items){
+  if(!items.length){g.innerHTML='<p class="empty">هنوز چیزی اضافه نشده. از admin.html عکس و متن اضافه کن.</p>';return}
+  items.forEach(it=>{
+    const f=document.createElement('figure'),p=document.createElement('div'),i=document.createElement('img'),c=document.createElement('figcaption');
+    p.className='ph';i.src=it.image;i.loading='lazy';i.decoding='async';i.alt=it.text||'';c.textContent=it.text||'';
+    i.onclick=()=>{lb.querySelector('img').src=it.image;lb.classList.add('on')};
+    p.append(i);f.append(p,c);g.append(f);io.observe(f);
+  });
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('lit',e.isIntersecting)),{rootMargin:'-35% 0px -35% 0px'});
+const s=document.createElement('script');s.src='gallery.js?'+Date.now();
+s.onload=()=>render(window.GALLERY||[]);s.onerror=()=>render([]);document.head.append(s);
+
+// blood rises + heartbeat edge grow with scroll (throttled, transform/opacity only)
+const fl=document.getElementById('flood'),bt=document.getElementById('beat');let tick=false,last=-1;
+function lvl(){tick=false;const h=document.documentElement.scrollHeight-innerHeight,p=h>0?scrollY/h:0,l=Math.min(1,Math.max(0,(p-.06)/.94));
+ if(Math.abs(l-last)<.02)return;last=l;
+ fl.style.transform='translateY('+(l<.01?125:(1-l)*100)+'%)';bt.style.setProperty('--s',l.toFixed(2))}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(lvl)}},{passive:true});
+
+if(!lite){
+ // eyes in the corners of the screen
+ setTimeout(function f(){const e=document.createElement('div');e.className='eyes';e.style.left=(6+rnd()*80)+'%';e.style.top=(10+rnd()*78)+'%';
+  e.innerHTML='<i></i><i></i>';document.body.append(e);setTimeout(()=>e.remove(),2700);setTimeout(f,9000+rnd()*8000)},9000);
+ // whispers
+ const W=['پشتت رو نگاه کن...','اون داره می‌بینتت','برنگرد','تنها نیستی','هیچکس برنمی‌گرده','ابرام همه چیز رو می‌بینه'];
+ setTimeout(function w(){const e=document.createElement('div');e.className='whisper';e.textContent=W[rnd()*W.length|0];
+  e.style.left=(4+rnd()*14)+'vw';e.style.top=(14+rnd()*70)+'vh';document.body.append(e);setTimeout(()=>e.remove(),4200);setTimeout(w,8000+rnd()*8000)},8000);
+ // rare jump scare
+ const j=document.getElementById('js'),sk=document.querySelector('.skull svg');
+ setTimeout(function k(){j.replaceChildren(sk.cloneNode(true));j.classList.add('on');navigator.vibrate&&navigator.vibrate([200,80,300]);
+  setTimeout(()=>j.classList.remove('on'),650);setTimeout(k,50000+rnd()*60000)},30000+rnd()*30000);
+}
+// cursed photo: red flash + caption change
+const C=['کمکم کن','نگاهم نکن','اون اینجاست','برگرد','هنوز اینجام','چرا اومدی؟'];
+setTimeout(function n(){const f=g.querySelectorAll('figure');
+ if(f.length&&!rm){const x=f[rnd()*f.length|0],c=x.querySelector('figcaption'),o=c.textContent;
+  x.classList.add('neg');c.textContent=C[rnd()*C.length|0];setTimeout(()=>{x.classList.remove('neg');c.textContent=o},550)}
+ setTimeout(n,9000+rnd()*9000)},9000);
+// title corruption
+const h1=document.querySelector('header h1'),sp=h1.querySelector('span'),t0=h1.firstChild,fa=t0.nodeValue,en=sp.textContent;
+function zal(t){return t.split('').map(ch=>ch===' '?ch:ch+Array.from({length:3+rnd()*3|0},()=>String.fromCharCode(768+rnd()*110|0)).join('')).join('')}
+if(!rm)setTimeout(function z(){t0.nodeValue='فرار کن';sp.textContent=zal(en);setTimeout(()=>{t0.nodeValue=fa;sp.textContent=en},320);setTimeout(z,10000+rnd()*9000)},12000);
+
+// sound (off until pressed)
+let ac,tm,on=false,nodes=[];
+function beat(){const t=ac.currentTime;[0,.3].forEach(o=>{const os=ac.createOscillator(),gn=ac.createGain();os.type='sine';
+ os.frequency.setValueAtTime(65,t+o);os.frequency.exponentialRampToValueAtTime(28,t+o+.22);
+ gn.gain.setValueAtTime(0,t+o);gn.gain.linearRampToValueAtTime(.85,t+o+.02);gn.gain.exponentialRampToValueAtTime(.001,t+o+.32);
+ os.connect(gn);gn.connect(ac.destination);os.start(t+o);os.stop(t+o+.4)})}
+document.getElementById('snd').onclick=function(){try{
+ if(!on){ac=ac||new(window.AudioContext||window.webkitAudioContext)();ac.resume();
+  const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=150;const gn=ac.createGain();gn.gain.value=.09;f.connect(gn);gn.connect(ac.destination);
+  nodes=[48,49.4].map(q=>{const o=ac.createOscillator();o.type='sawtooth';o.frequency.value=q;o.connect(f);o.start();return o});
+  beat();tm=setInterval(beat,1150);on=true;this.textContent='🔊 صدای جزیره'}
+ else{clearInterval(tm);nodes.forEach(o=>o.stop());nodes=[];on=false;this.textContent='🔇 صدای جزیره'}}catch(e){}};
+</script>
+</body>
+</html>
